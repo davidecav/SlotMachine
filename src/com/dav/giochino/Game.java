@@ -21,6 +21,8 @@ public class Game extends Canvas implements Runnable{
     private Random r;
 //    private KeyInput keyboard;
     private HUD hud;
+    private Spawner spawner;
+
 
     public Game(){
     	
@@ -30,12 +32,14 @@ public class Game extends Canvas implements Runnable{
         
         hud = new HUD();
         
+        spawner = new Spawner(handler,hud);
+        
         r = new Random();
          for(int i=0;i<5;i++){	//aggiungi nemici
              handler.addObject(new Enemy(r.nextInt(WIDTH),r.nextInt(HEIGHT),ID.Enemy, handler));
          }
          
-         handler.addObject(new Player(WIDTH/2,HEIGHT/2,ID.Player, handler));
+         handler.addObject( new Player(WIDTH/2,HEIGHT/2,ID.Player, handler));
             
         //this.addKeyListener(new KeyInput(handler));
     }
@@ -96,8 +100,8 @@ public class Game extends Canvas implements Runnable{
 
     private void tick(){
 
-        handler.tick();
-        hud.tick();
+        spawner.tick();
+        
     }
 
 
@@ -112,8 +116,8 @@ public class Game extends Canvas implements Runnable{
         g.setColor(Color.black);
         g.fillRect(0,0,WIDTH,HEIGHT);
         
-        hud.render(g);
-        handler.render(g);
+        spawner.render(g);
+
 
         g.dispose();
         bs.show();
