@@ -6,10 +6,10 @@ import java.awt.Rectangle;
 
 public class FastEnemy extends GameObject{
     
-	int lato =16;
+	float lato =16;
 	private Handler handler;
 	
-    public FastEnemy(int x, int y, ID id, Handler handler) {
+    public FastEnemy(float x, float y, ID id, Handler handler) {
         super(x, y, id);
         this.handler=handler;
         velX=6;
@@ -25,11 +25,11 @@ public class FastEnemy extends GameObject{
   
     public void render(Graphics g) {
         g.setColor(Color.orange);
-        g.fillRect(x,y,lato,lato);    
+        g.fillRect((int)x,(int)y,(int)lato,(int)lato);
         
     }
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle(x,y,lato,lato);
+		return new Rectangle((int)x,(int)y,(int)lato,(int)lato);
 	}
 }

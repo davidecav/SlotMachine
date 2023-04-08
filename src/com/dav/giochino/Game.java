@@ -33,12 +33,12 @@ public class Game extends Canvas implements Runnable{
         hud = new HUD();
         
         spawner = new Spawner(handler,hud);
-        
         r = new Random();
+        handler.addObject(new Enemy(r.nextInt(WIDTH),r.nextInt(HEIGHT),ID.Enemy, handler));
+        /*
          for(int i=0;i<5;i++){	//aggiungi nemici
-             handler.addObject(new Enemy(r.nextInt(WIDTH),r.nextInt(HEIGHT),ID.Enemy, handler));
          }
-         
+         */
          handler.addObject( new Player(WIDTH/2,HEIGHT/2,ID.Player, handler));
             
         //this.addKeyListener(new KeyInput(handler));
@@ -126,7 +126,7 @@ public class Game extends Canvas implements Runnable{
 
     }
 
-    public static int clamp(int var,int min,int max) {
+    public static float clamp(float var,float min,float max) {
     	if(var>=max)return var=max;
     	else if(var<=min)return var=min;
     	else return var;

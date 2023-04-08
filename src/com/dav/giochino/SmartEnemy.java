@@ -7,20 +7,18 @@ import java.util.Iterator;
 
 public class SmartEnemy extends GameObject{
     
-	int lato =16;
+	float lato =16;
 	private Handler handler;
 	private GameObject player;
 	
-    public SmartEnemy(int x, int y, ID id, Handler handler) {
+    public SmartEnemy(float x, float y, ID id, Handler handler) {
         super(x, y, id);
         this.handler=handler;
-        for (int i = 0; i < handler.object.size();i++ ) {
-			
-        	if(handler.object.get(i).getID() == ID.Player ) player=handler.object.get(i) ;
-        	
+        
+        for (int i = 0; i < handler.object.size();i++ ) {	
+        	if(handler.object.get(i).getId() == ID.Player ) player=handler.object.get(i) ;
 		}
-        velX=2;
-        velY=2;
+        
     }
     public void tick(){
     	 x+=velX;
@@ -28,7 +26,7 @@ public class SmartEnemy extends GameObject{
          
          float diffX = x - player.getX()-8;
          float diffY = y - player.getY()-8;
-         float distance = (float)Math.sqrt((x-player.getX())*(x-player.getX())*(y-player.getY())*y-player.getY());
+         float distance = (float)Math.sqrt(((x-player.getX())*(x-player.getX()))-((y-player.getY())*y-player.getY()));
          
          velX=(int)((-1.0 /distance )*diffX);
          velY=(int)((-1.0 /distance )*diffY);

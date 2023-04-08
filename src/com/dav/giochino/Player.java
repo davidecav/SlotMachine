@@ -8,10 +8,10 @@ import java.util.Iterator;
 
 public class Player extends GameObject{
 
-	int lato =32;
+	float lato =32;
 	private Handler handler;
 	
-    public Player(int x, int y, ID id, Handler handler) {
+    public Player(float x, float y, ID id, Handler handler) {
         super(x, y, id);
         this.handler=handler;
          
@@ -29,7 +29,7 @@ public class Player extends GameObject{
     public void collision() {
     	for(int i=0;i<handler.object.size();i++) {
     		GameObject tempObj = handler.object.get(i);
-    		if(tempObj.getID()==ID.Enemy) {
+    		if(tempObj.getId()==ID.Enemy) {
     			if(getBounds().intersects(tempObj.getBounds())) {
     				HUD.HEALTH--;
     			
@@ -41,12 +41,12 @@ public class Player extends GameObject{
     public void render(Graphics g) {  
     	Graphics2D g2d =(Graphics2D) g;
         g.setColor(Color.green);
-        g.fillRect(x,y,lato,lato);      
+        g.fillRect((int)x,(int)y,(int)lato,(int)lato);
         
     }
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle(x,y,lato,lato);
+		return new Rectangle((int)x,(int)y,(int)lato,(int)lato);
 	}
 
 }

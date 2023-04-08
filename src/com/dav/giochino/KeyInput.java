@@ -23,7 +23,7 @@ public class KeyInput extends KeyAdapter{
         for (int i = 0; i < handler.object.size(); i++) {
             GameObject tempObject = handler.object.get(i);
 
-            if(tempObject.getID()==ID.Player){
+            if(tempObject.getId()==ID.Player){
             	
                 if(key==KeyEvent.VK_UP) {tempObject.setVelY(-velstandard); keydown[0]=true;  };
                 if(key==KeyEvent.VK_DOWN) {tempObject.setVelY(velstandard); keydown[1]=true;  };
@@ -43,15 +43,15 @@ public class KeyInput extends KeyAdapter{
         for (int i = 0; i < handler.object.size(); i++) {
             GameObject tempObject = handler.object.get(i);
 
-            if(tempObject.getID()==ID.Player){
+            if(tempObject.getId()==ID.Player){
             	
-                if(key==KeyEvent.VK_UP) { keydown[0]=false;  };
-                if(key==KeyEvent.VK_DOWN) {keydown[0]=false;  };
-                if(key==KeyEvent.VK_LEFT) {keydown[0]=false;  };
-                if(key==KeyEvent.VK_RIGHT) {keydown[0]=false;  };
+                if(key==KeyEvent.VK_UP) keydown[0]=false;  ;
+                if(key==KeyEvent.VK_DOWN) keydown[1]=false;  ;
+                if(key==KeyEvent.VK_LEFT) keydown[2]=false;  ;
+                if(key==KeyEvent.VK_RIGHT) keydown[3]=false;  ;
               
-                if(!keydown[0]&&!keydown[1]) {tempObject.setVelY(0);}
-                if(!keydown[2]&&!keydown[3]) {tempObject.setVelX(0);}
+                if(!keydown[0]&&!keydown[1]) tempObject.setVelY(0);
+                if(!keydown[2]&&!keydown[3]) tempObject.setVelX(0);
             }
         }
     }
