@@ -16,18 +16,18 @@ public class Spawner {
 		
 	}
 	public void tick(){
-		handler.tick();
-		hud.tick();
+
 		scoreKeep++;
 		if (scoreKeep%500==0) {
 			hud.setLevel(hud.getLevel()+1);
 			
 			if (hud.getLevel()>0) {
-				if(hud.getLevel()%10!=0) {
 
+				if(hud.getLevel()%10!=0) {
 
 					if((hud.getLevel())%3==0) {
 						handler.addObject(new FastEnemy(r.nextFloat(Game.WIDTH),r.nextFloat(Game.HEIGHT),ID.Enemy,handler));
+
 					}else if(hud.getLevel()%5==0) {
 						handler.addObject(new SmartEnemy(Game.WIDTH/2, 30 ,ID.Enemy,handler));
 					}else {
@@ -44,7 +44,6 @@ public class Spawner {
 		
 	}
 	public void render(Graphics g) {
-		handler.render(g);
-		hud.render(g);
+		
 	}
 }

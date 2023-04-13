@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 public class Player extends GameObject{
 
-	float lato =32;
+	private float lato =32;
 	private Handler handler;
 	
     public Player(float x, float y, ID id, Handler handler) {
@@ -17,7 +17,13 @@ public class Player extends GameObject{
          
         
     }
-    public void tick(){
+    public float getLato() {
+		return lato;
+	}
+	public void setLato(float lato) {
+		this.lato = lato;
+	}
+	public void tick(){
         x+=velX;
         y+=velY;
         x=Game.clamp(x, 0, Game.WIDTH-lato);

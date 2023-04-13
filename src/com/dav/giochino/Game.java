@@ -22,26 +22,29 @@ public class Game extends Canvas implements Runnable{
 //    private KeyInput keyboard;
     private HUD hud;
     private Spawner spawner;
+    private Menu menu;
 
+    public enum STATE{
+    	Menu, Game, Help;
+    }
+    
+    public STATE gameState = STATE.Menu;
 
     public Game(){
     	
         handler = new Handler();
+        menu=new Menu(this,handler);
         this.addKeyListener(new KeyInput(handler));
-        new Window(WIDTH,HEIGHT, "titolo!!",this);
+        this.addMouseListener(menu);
+        new Window(WIDTH,HEIGHT, "Giochino!!",this);
         
         hud = new HUD();
         
         spawner = new Spawner(handler,hud);
         r = new Random();
-        handler.addObject(new Enemy(r.nextInt(WIDTH),r.nextInt(HEIGHT),ID.Enemy, handler));
-        /*
-         for(int i=0;i<5;i++){	//aggiungi nemici
-         }
-         */
-         handler.addObject( new Player(WIDTH/2,HEIGHT/2,ID.Player, handler));
-            
-        //this.addKeyListener(new KeyInput(handler));
+        
+        this.addKeyListener(new KeyInput(handler));
+	
     }
     public synchronized void start(){
         thread = new Thread(this);
@@ -100,7 +103,14 @@ public class Game extends Canvas implements Runnable{
 
     private void tick(){
 
-        spawner.tick();
+		handler.tick();
+		if(gameState==STATE.Game) {
+			hud.tick();
+			spawner.tick();			
+		} else if(gameState==STATE.Menu) {
+			menu.tick();
+			
+		}
         
     }
 
@@ -116,7 +126,16 @@ public class Game extends Canvas implements Runnable{
         g.setColor(Color.black);
         g.fillRect(0,0,WIDTH,HEIGHT);
         
-        spawner.render(g);
+        handler.render(g);
+        
+        if(gameState==STATE.Game) {
+			hud.render(g);
+			spawner.render(g);			
+		} else if((gameState==STATE.Menu)||(gameState==STATE.Help)) {
+			menu.render(g);
+			
+			
+		}
 
 
         g.dispose();
