@@ -17,11 +17,18 @@ public class Spawner {
 	}
 	public void tick(){
 
+		
+		
 		scoreKeep++;
 		if (scoreKeep%500==0) {
 			hud.setLevel(hud.getLevel()+1);
-			
+
+			//nemici iniziali
+			if((scoreKeep<499)&&(hud.getLevel()<1)) {
+				handler.addObject(new Enemy(r.nextFloat(Game.WIDTH),r.nextFloat(Game.HEIGHT),ID.Enemy,handler));
+			}
 			if (hud.getLevel()>0) {
+				
 
 				if(hud.getLevel()%10!=0) {
 
@@ -35,7 +42,6 @@ public class Spawner {
 					}
 				
 				}else {
-					handler.clearEnemies();
 					handler.addObject(new EnemyBoss(Game.WIDTH/2, 30 ,ID.Enemy,handler));
 				
 				}

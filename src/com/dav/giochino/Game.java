@@ -3,9 +3,15 @@ package com.dav.giochino;
 
 import java.awt.Canvas;
 import java.util.Random;
+
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.io.IOException;
 
 
 public class Game extends Canvas implements Runnable{
@@ -19,32 +25,47 @@ public class Game extends Canvas implements Runnable{
     private boolean running = false;
     private Handler handler;
     private Random r;
-//    private KeyInput keyboard;
     private HUD hud;
     private Spawner spawner;
     private Menu menu;
+    private AudioPlayer audio;
 
     public enum STATE{
-    	Menu, Game, Help;
+    	Menu, Game, Help, End;
     }
     
-    public STATE gameState = STATE.Menu;
+    public static STATE gameState = STATE.Menu;
 
     public Game(){
     	
+    	audio = new AudioPlayer();
+
+
+    	
         handler = new Handler();
-        menu=new Menu(this,handler);
+        hud = new HUD();
+        menu=new Menu(this,handler,this.hud);
         this.addKeyListener(new KeyInput(handler));
         this.addMouseListener(menu);
         new Window(WIDTH,HEIGHT, "Giochino!!",this);
         
-        hud = new HUD();
         
         spawner = new Spawner(handler,hud);
         r = new Random();
         
         this.addKeyListener(new KeyInput(handler));
 	
+        if(gameState==STATE.Game) {
+        	handler.clearEnemies();
+
+        }else {
+        	for (int i = 0; i < 10; i++) {
+				
+        	handler.addObject(new MenuParticle(r.nextFloat(WIDTH),r.nextFloat(HEIGHT),ID.MenuParticle,handler));
+        	}
+        }
+		audio.update();
+
     }
     public synchronized void start(){
         thread = new Thread(this);
@@ -92,9 +113,6 @@ public class Game extends Canvas implements Runnable{
 
             }
 
-
-
-
         }
         stop();
 
@@ -103,13 +121,22 @@ public class Game extends Canvas implements Runnable{
 
     private void tick(){
 
-		handler.tick();
+    	
+    	handler.tick();
 		if(gameState==STATE.Game) {
 			hud.tick();
 			spawner.tick();			
-		} else if(gameState==STATE.Menu) {
-			menu.tick();
 			
+			if(hud.HEALTH<=0) {
+
+				handler.object.clear();
+				gameState=STATE.End;
+
+				
+			}
+			
+		} else if((gameState==STATE.Menu)||(gameState==STATE.End)) {
+			menu.tick();	
 		}
         
     }
@@ -122,6 +149,7 @@ public class Game extends Canvas implements Runnable{
             return;
         }
 
+        //sfondo
         Graphics g = bs.getDrawGraphics();
         g.setColor(Color.black);
         g.fillRect(0,0,WIDTH,HEIGHT);
@@ -129,11 +157,9 @@ public class Game extends Canvas implements Runnable{
         handler.render(g);
         
         if(gameState==STATE.Game) {
-			hud.render(g);
-			spawner.render(g);			
-		} else if((gameState==STATE.Menu)||(gameState==STATE.Help)) {
+			hud.render(g);			
+		} else if((gameState==STATE.Menu)||(gameState==STATE.Help)||(gameState==STATE.End)) {
 			menu.render(g);
-			
 			
 		}
 
