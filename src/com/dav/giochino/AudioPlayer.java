@@ -12,16 +12,20 @@ public class AudioPlayer {
 	String audioFilePath = "./audio/synth.mp3";
 	
 	
+	FileInputStream fileInputStream;
+	Player player;
 	
 	public void update() {
 		try {
-            FileInputStream fileInputStream = new FileInputStream(new File(audioFilePath));
-            Player player = new Player(fileInputStream);
+			
+			fileInputStream = new FileInputStream(new File(audioFilePath));
 
+			player = new Player(fileInputStream);
             System.out.println("Riproduzione iniziata!");
 
             player.play();
 
+            
 
             System.out.println("Riproduzione terminata!");
             
@@ -29,6 +33,18 @@ public class AudioPlayer {
         } catch (JavaLayerException | IOException e) {
             System.out.println("file non esistente");
         }	
+		
+	}
+	public void repeat() {
+		
+		if(player.isComplete()) {
+			try {
+				player.play();
+			} catch (JavaLayerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 	}
 	

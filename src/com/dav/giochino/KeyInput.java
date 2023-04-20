@@ -3,14 +3,19 @@ package com.dav.giochino;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import com.dav.giochino.Game.STATE;
+
 public class KeyInput extends KeyAdapter{
 
 	private Handler handler;
     private int velstandard=5;
     private boolean [] keydown=new boolean[4];
+    private Game game;
     
     //costruttore
-    public KeyInput(Handler handler){
+    public KeyInput(Handler handler,Game game){
+    	this.game= game;
+    	
         this.handler=handler;
         for(int i= 0;i<4;i++) {
         	keydown[i]=false;
@@ -32,8 +37,16 @@ public class KeyInput extends KeyAdapter{
                 
             }
         }
+        
+        if(key==KeyEvent.VK_P) {
+        	if(game.gameState==STATE.Game) {
+        		Game.pause=!Game.pause;
+        	}
+        	
+        }
         if(key==KeyEvent.VK_ESCAPE)System.exit(1);
 
+        
     }
 
     public void keyReleased(KeyEvent e){

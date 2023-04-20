@@ -30,13 +30,9 @@ public class Menu extends MouseAdapter{
 		if(game.gameState==STATE.Menu) {
 			
 			if(mouseOver(mx, my, Game.WIDTH/2-150, 150, 300, 40)) {
-				hud.setLevel(1);
-				hud.setScore(0);
-				hud.HEALTH=100;
-				game.gameState = STATE.Game;
-				handler.addObject( new Giocatore(game.WIDTH/2,game.HEIGHT/2,ID.Player, handler));
-				handler.clearEnemies();
-				handler.addObject(new Enemy(r.nextFloat(game.WIDTH),r.nextFloat(game.HEIGHT),ID.Enemy, handler));
+			
+				game.gameState=STATE.Select;
+				return;
 			}
 			if(mouseOver(mx, my, Game.WIDTH/2-150, 250, 300, 40)) {
 				game.gameState = STATE.Help; 
@@ -46,10 +42,46 @@ public class Menu extends MouseAdapter{
 				System.exit(1);
 			}
 		}
+		if(game.gameState ==STATE.Select) {
+			
+			if(mouseOver(mx, my, Game.WIDTH/2-150, 150, 300, 40)) {//normale
+				
+				hud.setLevel(1);
+				hud.setScore(0);
+				hud.HEALTH=100;
+				game.gameState = STATE.Game;
+				handler.addObject( new Giocatore(game.WIDTH/2,game.HEIGHT/2,ID.Player, handler));
+				handler.clearEnemies();
+				handler.addObject(new Enemy(r.nextFloat(game.WIDTH),r.nextFloat(game.HEIGHT),ID.Enemy, handler));
+
+			}
+			if(mouseOver(mx, my, Game.WIDTH/2-150, 250, 300, 40)) {//difficile
+				hud.setLevel(1);
+				hud.setScore(0);
+				hud.HEALTH=100;
+				game.gameState = STATE.Game;
+				handler.addObject( new Giocatore(game.WIDTH/2,game.HEIGHT/2,ID.Player, handler));
+				handler.clearEnemies();
+
+				handler.addObject(new SmartEnemy(r.nextFloat(game.WIDTH),r.nextFloat(game.HEIGHT),ID.Enemy, handler));
+				handler.addObject(new FastEnemy(r.nextFloat(game.WIDTH),r.nextFloat(game.HEIGHT),ID.Enemy, handler));
+
+				for(int i=0;i<3;i++) {
+					handler.addObject(new Enemy(r.nextFloat(game.WIDTH),r.nextFloat(game.HEIGHT),ID.Enemy, handler));
+				}
+			}
+			if(mouseOver(mx, my, Game.WIDTH/2-150, 350, 300, 40)) {
+				game.gameState=STATE.Menu;
+				return;
+			}
+			
+			
+		}
 		if(game.gameState ==STATE.Help) {
 			
 			if (mouseOver(mx, my, Game.WIDTH/2-150, 350, 300, 40)) {
 				game.gameState=STATE.Menu;
+				return;
 			}	
 		}
 		if(game.gameState ==STATE.End) {
@@ -89,25 +121,25 @@ public class Menu extends MouseAdapter{
 		Color coloreBottone=Color.red;
 		
 		if(game.gameState==STATE.Menu) {
-
-		g.setFont(fontTitolo);
-		g.setColor(coloreTitolo);
-		g.drawString("MENU", Game.WIDTH/2-80, 50);
-		
-		g.setFont(fontMenu);
-		g.setColor(coloreBottone);
-		g.fillRect(Game.WIDTH/2-150, 150, 300, 40);
-		g.setColor(coloreFont);
-		g.drawString("New Game", Game.WIDTH/2-90, 180);
-		g.setColor(coloreBottone);
-		g.fillRect(Game.WIDTH/2-150, 250, 300, 40);
-		g.setColor(coloreFont);
-		g.drawString("Help", Game.WIDTH/2-35, 280);
-		g.setColor(coloreBottone);
-		g.fillRect(Game.WIDTH/2-150, 350, 300, 40);
-		g.setColor(coloreFont);
-		g.drawString("Exit", Game.WIDTH/2-30, 380);
-		
+	
+			g.setFont(fontTitolo);
+			g.setColor(coloreTitolo);
+			g.drawString("MENU", Game.WIDTH/2-80, 50);
+			
+			g.setFont(fontMenu);
+			g.setColor(coloreBottone);
+			g.fillRect(Game.WIDTH/2-150, 150, 300, 40);
+			g.setColor(coloreFont);
+			g.drawString("New Game", Game.WIDTH/2-90, 180);
+			g.setColor(coloreBottone);
+			g.fillRect(Game.WIDTH/2-150, 250, 300, 40);
+			g.setColor(coloreFont);
+			g.drawString("Help", Game.WIDTH/2-35, 280);
+			g.setColor(coloreBottone);
+			g.fillRect(Game.WIDTH/2-150, 350, 300, 40);
+			g.setColor(coloreFont);
+			g.drawString("Exit", Game.WIDTH/2-30, 380);
+			
 		}
 		if(game.gameState==STATE.Help) {
 			g.setFont(fontMenu);
@@ -141,5 +173,25 @@ public class Menu extends MouseAdapter{
 			
 		}
 
+		if(game.gameState==STATE.Select) {
+
+			g.setFont(fontMenu);
+			g.setColor(coloreTitolo);
+			g.drawString("Seleziona la difficoltà", 120, 50);
+			
+			g.setFont(fontMenu);
+			g.setColor(coloreBottone);
+			g.fillRect(Game.WIDTH/2-150, 150, 300, 40);
+			g.setColor(coloreFont);
+			g.drawString("Normale", Game.WIDTH/2-70, 180);
+			g.setColor(coloreBottone);
+			g.fillRect(Game.WIDTH/2-150, 250, 300, 40);
+			g.setColor(coloreFont);
+			g.drawString("Difficile", Game.WIDTH/2-60, 280);
+			g.setColor(coloreBottone);
+			g.fillRect(Game.WIDTH/2-150, 350, 300, 40);
+			g.setColor(coloreFont);
+			g.drawString("Back", Game.WIDTH/2-40, 380);
+		}
 	}
 }
