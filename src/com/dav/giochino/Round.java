@@ -9,7 +9,8 @@ public class Round {
 
 
 	public Grid giocaround(StatoPartita stato) {
-		Grid grid = new Grid(stato);
+			
+			Grid grid = new Grid(stato);
 			Partita part = new Partita(stato);
 		
 			//seleziono tre velocita casuali

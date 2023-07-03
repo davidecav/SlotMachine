@@ -8,15 +8,23 @@ package com.dav.giochino;
 public class StatoPartita{
 	
 	private int punteggio = 0;
-	private int bonusCoin = 0;
+	private double bonusCoin = 0;
 	private int credits = 0;
 	private double totaleBonus =0;
 	private int hit =0;
 	private int partiteNelRound =10;
 
+	private double diceSum =0;
+
 	
 	
 	
+	public double getDiceSum() {
+		return diceSum;
+	}
+	public void setDiceSum(double diceSum) {
+		this.diceSum = diceSum;
+	}
 	public int getPartiteNelRound() {
 		return partiteNelRound;
 	}
@@ -42,11 +50,11 @@ public class StatoPartita{
 	public void setCredits(int credits) {
 		this.credits = credits;
 	}
-	public int getBonusCoin() {
+	public double getBonusCoin() {
 		return bonusCoin;
 	}
-	public void setBonusCoin(int bonusCoin) {
-		this.bonusCoin = bonusCoin;
+	public void setBonusCoin(double d) {
+		this.bonusCoin = d;
 	}
 	public int getPunteggio() {
 		return punteggio;

@@ -85,7 +85,7 @@ public class Partita {
 		}
 		
 		if(bonus>=3) {
-			int partitaBonus=(int)Math.round(bonus/3);
+			double partitaBonus=Math.round(bonus/3);
 			partitaBonus(partitaBonus);
 		}
 		//stato.setBonus(0);
@@ -126,7 +126,7 @@ public class Partita {
 		return moltiplicatore;
 	
 	}
-	public void partitaBonus(int partitaBonus){
+	public void partitaBonus(double partitaBonus){
 
 		int coins []={100, 50, 30, 20, 10, 5, 4, 3, 2};
 		double moltiplicatore = Math.ceil (Math.random()*1401);
@@ -144,6 +144,7 @@ public class Partita {
 		
 
 		double lancio =Math.ceil(Math.random()*6);
+		this.stato.setDiceSum(this.stato.getDiceSum() + lancio);
 
 		this.stato.setBonusCoin(this.stato.getBonusCoin()+partitaBonus);
 		//10 round

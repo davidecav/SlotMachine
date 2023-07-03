@@ -27,19 +27,32 @@ public class SlotMachine {
 			}
 			
 		}
-
-		System.out.println("il totale era di :\t\t\t\t" + dieciMilioni);
-
-		System.out.println("la media di vittorie e di :\t\t\t" + (grid.getStato().getPunteggio()/(float)dieciMilioni) * 100 + " %" );
-
-		System.out.println("la media di bonus game a partita e di :\t\t" + ((float)dieciMilioni / grid.getStato().getBonusCoin()/10));
-
-		System.out.println("i gettoni guadagnati con i bonus sono:\t\t" + stato.getTotaleBonus());
 		
-		System.out.println("si sono persi :\t\t\t\t\t" + ( dieciMilioni-grid.getStato().getPunteggio()));
+		//fratto 10 per ogni round
+		int round = 10;
+		double hitfreq=((double)dieciMilioni / grid.getStato().getBonusCoin()/(double)round);
+		double averageBonWin=(float)grid.getStato().getTotaleBonus()/hitfreq;
+		double averageDice = grid.getStato().getDiceSum()/grid.getStato().getBonusCoin();
+		
+		double bonusGameAverageWin = averageDice * averageBonWin * round;
+		double bonusGameReturn = bonusGameAverageWin /hitfreq / round;
+		
+		
+		System.out.println("Starting with an amount of coin of :\t\t" + dieciMilioni);
 
-		System.out.println("il totale di hit e di :\t\t\t\t" + stato.getHit());
+		System.out.println("Base Game return :\t\t\t\t" + (grid.getStato().getPunteggio()/(float)dieciMilioni) * 100 + " %" );
 
+		System.out.println("Average Bonus Game return :\t\t\t" + averageBonWin + " %" );
+		
+		System.out.println("Coins won with a Bonus Game :\t\t\t" + bonusGameAverageWin);
+
+		System.out.println("Hit frequency in Bonus Games : \t\t\t" + hitfreq);
+
+		System.out.println("Bonus Game return :\t\t\t\t" + bonusGameReturn);
+
+
+//		System.out.println("Total of hits :\t\t\t\t\t" + stato.getHit());
+//		System.out.println("Total of coins lost :\t\t\t\t" + ( dieciMilioni-grid.getStato().getPunteggio()));
 	
 
 	}
