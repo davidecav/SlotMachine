@@ -47,12 +47,12 @@ public class SlotMachine {
 		System.out.println("Coins won with a Bonus Game :\t\t\t" + bonusGameAverageWin);
 
 		System.out.println("Hit frequency in Bonus Games : \t\t\t" + hitfreq);
+		//percentuale
+		System.out.println("Bonus Game return :\t\t\t\t" + (bonusGameReturn *100) + " %");
 
-		System.out.println("Bonus Game return :\t\t\t\t" + bonusGameReturn);
 
-
-//		System.out.println("Total of hits :\t\t\t\t\t" + stato.getHit());
-//		System.out.println("Total of coins lost :\t\t\t\t" + ( dieciMilioni-grid.getStato().getPunteggio()));
+		System.out.println("Total of hits :\t\t\t\t\t" + stato.getHit());
+		System.out.println("Total of coins lost :\t\t\t\t" + ( dieciMilioni-grid.getStato().getPunteggio()));
 	
 
 	}
