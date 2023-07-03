@@ -7,12 +7,12 @@ package com.dav.giochino;
  * */
 public class StatoPartita{
 	
-	private int punteggio = 0;
-	private double bonusCoin = 0;
-	private int credits = 0;
-	private double totaleBonus =0;
+	private int win = 0;
+	private double amountOfTimesOfBonus = 0;	//total of time of bonus
+	private int credits = 0;		
+	private double totalOfCoinGainedWithBonus =0;	//gain from bonus
 	private int hit =0;
-	private int partiteNelRound =10;
+	private int gamesInARound =10;
 
 	private double diceSum =0;
 
@@ -25,11 +25,11 @@ public class StatoPartita{
 	public void setDiceSum(double diceSum) {
 		this.diceSum = diceSum;
 	}
-	public int getPartiteNelRound() {
-		return partiteNelRound;
+	public int getGamesInARound() {
+		return gamesInARound;
 	}
-	public void setPartiteNelRound(int partiteNelRound) {
-		this.partiteNelRound = partiteNelRound;
+	public void setGamesInARound(int partiteNelRound) {
+		this.gamesInARound = partiteNelRound;
 	}
 	public int getHit() {
 		return hit;
@@ -37,12 +37,11 @@ public class StatoPartita{
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
-	public double getTotaleBonus
-	() {
-		return totaleBonus;
+	public double getTotalOfCoinGainedWithBonus() {
+		return totalOfCoinGainedWithBonus;
 	}
-	public void setTotaleBonus(double totaleBonus) {
-		this.totaleBonus = totaleBonus;
+	public void setTotalOfCoinGainedWithBonus(double totaleBonus) {
+		this.totalOfCoinGainedWithBonus = totaleBonus;
 	}
 	public int getCredits() {
 		return credits;
@@ -50,17 +49,17 @@ public class StatoPartita{
 	public void setCredits(int credits) {
 		this.credits = credits;
 	}
-	public double getBonusCoin() {
-		return bonusCoin;
+	public double getAmountOfTimesOfBonus() {
+		return amountOfTimesOfBonus;
 	}
-	public void setBonusCoin(double d) {
-		this.bonusCoin = d;
+	public void setAmountOfTimesOfBonus(double d) {
+		this.amountOfTimesOfBonus = d;
 	}
-	public int getPunteggio() {
-		return punteggio;
+	public int getWin() {
+		return win;
 	}
-	public void setPunteggio(int punteggio) {
-		this.punteggio = punteggio;
+	public void setWin(int punteggio) {
+		this.win = punteggio;
 	}
 	
 

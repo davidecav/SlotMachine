@@ -89,7 +89,7 @@ public class Partita {
 			partitaBonus(partitaBonus);
 		}
 		//stato.setBonus(0);
-		this.stato.setPunteggio(this.stato.getPunteggio()+punteggio);
+		this.stato.setWin(this.stato.getWin()+punteggio);
 	
 	}
 	public int moltiplicatore(Casella casella) {
@@ -144,15 +144,19 @@ public class Partita {
 		
 
 		double lancio =Math.ceil(Math.random()*6);
+		
+		//add all dices
 		this.stato.setDiceSum(this.stato.getDiceSum() + lancio);
 
-		this.stato.setBonusCoin(this.stato.getBonusCoin()+partitaBonus);
+		//add all bonusGames
+		this.stato.setAmountOfTimesOfBonus(this.stato.getAmountOfTimesOfBonus() + partitaBonus);
 		//10 round
-		if(stato.getPartiteNelRound() % 10 != 0){
+		if(stato.getGamesInARound() % 10 != 0){
 
-			double gettoni = lancio * moltiplicatore/1401 *(this.stato.getPartiteNelRound()%10);
-		
-			this.stato.setTotaleBonus(this.stato.getTotaleBonus() + gettoni);
+			double gettoni = lancio * moltiplicatore/1401 *(this.stato.getGamesInARound()%10);
+			
+			//gain from bonus
+			this.stato.setTotalOfCoinGainedWithBonus(this.stato.getTotalOfCoinGainedWithBonus() + gettoni);
 		}
 
 	}
